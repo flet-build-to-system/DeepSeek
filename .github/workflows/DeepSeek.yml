@@ -50,11 +50,16 @@ jobs:
             flutter config --no-analytics
             flet publish --base-url ${GITHUB_REPOSITORY#*/} --route-url-strategy hash
 
+    - name: List Files (Debug)
+      run: |
+        echo "Contents of build/web:"
+        ls -R build/web
+
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: web-build-artifact
-        path: build/web  # تأكد من تعديل هذا المسار إذا كان `flet publish` ينشئ الملفات في مسار مختلف
+        path: build/web
 
   deploy:
     needs: build
